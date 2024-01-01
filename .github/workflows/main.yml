@@ -30,6 +30,8 @@ jobs:
       runs-on: ubuntu-latest
       needs: build
       steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v2  # Ensure that the repository is checked out
         - name: Create and Push to New Branch
           run: |
             git config --global user.email "zan272905918@163.com"
