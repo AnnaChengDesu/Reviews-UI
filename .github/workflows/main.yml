@@ -27,6 +27,8 @@ jobs:
         yarn build
     - name: Create and Push to New Branch
       run: |
+        git config --global user.email "272905918@qq.com"
+        git config --global user.name "ACTION BOT"
         # Create a new branch (replace new-branch-name with your desired branch name)
         git checkout -b artifact
         # Add and commit the changes
