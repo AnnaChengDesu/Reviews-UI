@@ -26,49 +26,26 @@ jobs:
     - name: Build Vue App
       run: |
         yarn build
-    - name: Create and Push to New Branch
-      run: |
-        git config --global user.email "272905918@qq.com"
-        git config --global user.name "ACTION BOT"
-        # Create a new branch (replace new-branch-name with your desired branch name)
-        git checkout -b artifact
-        # Add and commit the changes
-        git add .
-        git commit -m "Add build artifacts"
-        # Push to the new branch
-        git push origin artifact
+    # - name: Create and Push to New Branch
+    #   run: |
+    #     git config --global user.email "272905918@qq.com"
+    #     git config --global user.name "ACTION BOT"
+    #     # Create a new branch (replace new-branch-name with your desired branch name)
+    #     git checkout -b artifact
+    #     # Add and commit the changes
+    #     git add .
+    #     git commit -m "Add build artifacts"
+    #     # Push to the new branch
+    #     git push origin artifact
+ 
+  deploy:
+    runs-on: ubuntu-latest
 
-  # upload:
-  #     runs-on: ubuntu-latest
-  #     needs: build
-  #     steps:
-  #       - name: Checkout Repository
-  #         uses: actions/checkout@v2  # Ensure that the repository is checked out
-  #       - name: Create and Push to New Branch
-  #         run: |
-  #           git config --global user.email "zan272905918@163.com"
-  #           git config --global user.name "AnnaCheng"
-  
-  #           # Create a new branch (replace new-branch-name with your desired branch name)
-  #           git checkout -b artifact
-  #           # Add and commit the changes
-  #           git add .
-  #           git commit -m "Add build artifacts"
-  
-  #           # Set the remote repository URL (replace with your repository URL)
-  #           git remote add origin https://github.com/AnnaChengDesu/Reviews-UI.git
-  
-  #           # Push to the new branch
-  #           git push origin artifact
+    needs: build
 
-  # deploy:
-  #   runs-on: ubuntu-latest
-
-  #   needs: build
-
-  #   steps:
-  #   - name: Deploy to GitHub Pages
-  #     uses: peaceiris/actions-gh-pages@v3
-  #     with:
-  #       github_token: ${{ secrets.GITHUB_TOKEN }}
-  #       publish_dir: ./dist  # Vue 项目的构建输出目录
+    steps:
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist  # Vue 项目的构建输出目录
