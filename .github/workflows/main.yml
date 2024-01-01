@@ -20,7 +20,8 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        npm install
+        echo node version is `node -v`
+        yarn
 
     - name: Build Vue App
       run: |
