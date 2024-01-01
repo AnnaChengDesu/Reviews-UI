@@ -39,10 +39,6 @@ jobs:
   
             # Create a new branch (replace new-branch-name with your desired branch name)
             git checkout -b artifact
-  
-            # Move the contents of the dist directory to the root
-            mv dist/* .
-  
             # Add and commit the changes
             git add .
             git commit -m "Add build artifacts"
