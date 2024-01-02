@@ -26,7 +26,6 @@ export const useReviewsStore = defineStore("reviews", {
                 const reviews = await fetch(`${BASE_URL}/api/reviews`)
                 const data = await reviews.json()
                 this.reviews = data
-                console.log(data)
             } catch (error) {
                 console.log(error);
             }
