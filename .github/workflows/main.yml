@@ -1,34 +1,31 @@
-name: Deploy to GitHub Pages
+name: Build and Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - master  # 这里使用你的默认分支名称，如果不是 main，请替换成你的默认分支名称
+      - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 18
 
       - name: Install dependencies
-        run: yarn
+        run: npm install
 
-      - name: Build and deploy
-        run: |
-          yarn build
-          git config --global user.email "272905918@qq.com"
-          git config --global user.name "Deploy BOT"
-          git checkout --orphan gh-pages
-          git rm -rf .
-          mv dist/* .
-          rm -r dist
-          git add .
-          git commit -m "Deploy to GitHub Pages"
-          git push -f origin gh-pages
+      - name: Build
+        run: npm run build  # Replace with your build command
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build  # Replace with your build output directory
